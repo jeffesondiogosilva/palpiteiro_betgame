@@ -1,0 +1,45 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        Int      @id @default(autoincrement())
+  name      String
+  email     String   @unique
+  password  String      
+  shots     Shot[]   // Relacionamento com os palpites do usuário
+}
+
+model Match {
+  id              Int      @id @default(autoincrement())
+  home            String
+  away            String
+  result_type_id  Int?     @unique // Apenas um resultado por jogo
+  date            DateTime
+  resultType      ResultType? @relation(fields: [result_type_id], references: [id])
+  shots           Shot[]   // Relacionamento com os palpites
+}
+
+model ResultType {
+  id          Int      @id @default(autoincrement())
+  result_type String
+  matches     Match[]  // Relacionamento com os jogos
+  shots       Shot[]   // Relacionamento com os palpites
+}
+
+model Shot {
+  id              Int      @id @default(autoincrement())
+  user_id         Int
+  match_id        Int
+  result_type_id  Int
+  date            DateTime @default(now())
+
+  user        User       @relation(fields: [user_id], references: [id], onDelete: Cascade)
+  match       Match      @relation(fields: [match_id], references: [id], onDelete: Cascade)
+  resultType  ResultType @relation(fields: [result_type_id], references: [id], onDelete: Cascade)
+}

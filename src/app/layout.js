@@ -1,5 +1,8 @@
+// src/app/layout.js
+import 'bootstrap/dist/css/bootstrap.min.css';
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
+import SessionProviderWrapper from "../components/SessionProviderWrapper";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,9 +21,12 @@ export const metadata = {
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="pt-BR">
+      <head />
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
-        {children}
+        <SessionProviderWrapper>
+          {children}
+        </SessionProviderWrapper>
       </body>
     </html>
   );
