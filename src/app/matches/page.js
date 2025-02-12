@@ -73,7 +73,7 @@ export default function MatchesPage() {
   }
 
   return (
-    <div className="container mt-5">
+    <div className="container mt-5 bg-dark text-white p-4 rounded">
       <h1 className="mb-4 text-center">Palpite nos Jogos</h1>
       {error && <p className="text-danger">{error}</p>}
       <form onSubmit={handleSubmit}>

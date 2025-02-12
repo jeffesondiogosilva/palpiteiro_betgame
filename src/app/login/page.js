@@ -30,30 +30,40 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-      <h1 className="text-2xl font-bold mb-4">Login</h1>
-      <form onSubmit={handleLogin} className="bg-white p-6 rounded-lg shadow-md">
-        {error && <p className="text-red-500 mb-2">{error}</p>}
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          className="w-full mb-2 p-2 border rounded"
-          required
-        />
-        <input
-          type="password"
-          placeholder="Senha"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          className="w-full mb-2 p-2 border rounded"
-          required
-        />
-        <button type="submit" className="w-full bg-blue-500 text-white p-2 rounded">
-          Entrar
-        </button>
-      </form>
+    <div className="d-flex justify-content-center align-items-center vh-100 bg-dark">
+      <div className="bg-light text-dark p-5 rounded-lg shadow-lg w-100" style={{ maxWidth: "400px" }}>
+        <h1 className="text-center text-2xl font-bold mb-4">Login</h1>
+        {error && <p className="text-danger text-center mb-3">{error}</p>}
+
+        <form onSubmit={handleLogin}>
+          <div className="mb-3">
+            <input
+              type="email"
+              placeholder="Email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+
+          <div className="mb-3">
+            <input
+              type="password"
+              placeholder="Senha"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              className="form-control"
+              required
+            />
+          </div>
+
+          <button type="submit" className="btn btn-primary w-100">
+            Entrar
+          </button>
+        </form>
+      </div>
     </div>
+
   );
 }
